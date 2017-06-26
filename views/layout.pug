@@ -1,0 +1,15 @@
+include _mixins
+
+doctype html
+html
+  head
+    title= title
+    +stylesheet_link('style')
+  body
+    header
+      div.search-box
+        input.search-input(type='text' name='search')
+        a.search-icon(href="#")
+      button.btn.notification
+      span.clear
+    block content
