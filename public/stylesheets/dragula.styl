@@ -1,0 +1,55 @@
+.list-wrapper.gu-mirror
+  // visibility: hidden
+  .list
+    width: 270px !important
+    
+.gu-mirror
+  position: fixed !important
+  // margin: 0 !important
+  // margin-bottom: -10px !important
+  // padding: 10px 8px 0 8px !important
+  // padding: inherit !important
+  // padding-bottom: -10px !important
+  box-sizing: border-box !important
+  z-index: 9999 !important
+  // opacity 0.8
+  opacity: 1 !important
+  -ms-transform: rotate(4deg); /* IE 9 */
+  -webkit-transform: rotate(4deg); /* Chrome, Safari, Opera */
+  transform: rotate(4deg);
+  // width: 236px !important
+  // height: smaller(inherit) !important
+  color: colors.text-dark !important
+  
+
+
+.gu-hide
+  display none !important
+
+.gu-unselectable
+  user-select none !important
+
+.gu-transit
+  // opacity 0.2
+  // opacity 1
+  // height: 100%-10px !important
+  background-color: colors.card-drag-ghost !important
+  color: colors.card-drag-ghost !important
+
+.list-wrapper.gu-transit
+  background-color: colors.main !important
+  .list
+    // opacity 0.2
+    // opacity 1
+    background-color: colors.list-drag-ghost !important
+    color: colors.list-drag-ghost !important
+    .list-cards
+      visibility: hidden
+    footer
+      visibility: hidden
+
+// .ex-moved 
+//   background-color: #e74c3c;
+
+// .ex-over
+//   background-color: rgba(255, 255, 255, 0.3);

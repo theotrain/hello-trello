@@ -1,19 +1,25 @@
 @import 'whitespace-reset.css'
 @import 'mixins'
+@import 'dragula'
 
 // *
   // box-sizing: border-box
-  
+html
+  height: 100%
+   
 body
   // padding: 50px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
   background-color: colors.main
   color: colors.text-light
+  height: 100%
 
-a
-  color: #00B7FF
+// a
+//   color: #00B7FF
+// #board
+//   height: 100%
   
-header
+body > header
   height: 40px
   width: 100%
   background: no-repeat center url('/images/hello.png')
@@ -32,22 +38,22 @@ header
     &:focus
       background-color: white
   .search-input
-    background-color: rgba(255,255,255,.3);
-    border-radius: 3px;
-    border: none;
+    background-color: rgba(255,255,255,.3)
+    border-radius: 3px
+    border: none
     color: colors.text-light
-    float: left;
-    font-size: 13px;
-    height: 30px;
+    float: left
+    font-size: 13px
+    height: 30px
     outline: none
-    margin: 0;
-    min-height: 30px;
-    padding-right: 30px;
-    padding-left: 8px;
-    line-height: 19px;
-    -webkit-transition: width 150ms;
-    transition: width 150ms;
-    width: 180px;
+    margin: 0
+    min-height: 30px
+    padding-right: 30px
+    padding-left: 8px
+    line-height: 19px
+    -webkit-transition: width 150ms
+    transition: width 150ms
+    width: 180px
     z-index: 1;
     &:hover
       background-color: colors.head-inner-hover
@@ -72,39 +78,14 @@ header
     float: left;
     margin: 5px 8px 5px 5px;
     position: relative;
-    z-index: 1;
-      
-    
-  // overflow: auto
-  // .btn
-  //   display: inline-block
-  //   background-color: colors.head-inner
-  //   border: none
-  //   height: 30px
-  //   border-radius: 3px
-  //   margin: 5px
-  //   outline: none
-  //   &:hover
-  //     background-color: colors.head-inner-hover
-  //   &:focus
-  //     background-color: white
-  //   // &:hover
-  //   //   background-color: colors.head-inner-hover
-  // .search
-  //   font-size: 13px
-  //   width: 180px
-  //   float: left
-  //   background-image: url('/images/search.png')
-  //   background-repeat: no-repeat
-  //   background-position: center 160px
-  // input[type=text]
-  //   padding-left: 9px
-       
+    z-index: 1;   
   .notification
     width: 30px
     top: 0px
     float: right
-    
+    background-image: url('/images/notification.png')
+    background-repeat: no-repeat
+    background-position: center center
 
 #subhead
   height: 45px
@@ -113,15 +94,189 @@ header
   font-weight: bold
   line-height: 45px
   padding: 0 18px;
-  
+
 main
+  position: relative;
+  height: 100%
+  // -webkit-box-flex: 1;
+  // -webkit-flex-grow: 1;
+  // -ms-flex-positive: 1;
+  // flex-grow: 1
+
+#list-container
+  height: 100%
   background-color: colors.main
   color: colors.text-light
+  padding: 0 5px 10px 5px
+  overflow-x: auto
+  overflow-y: hidden
+  padding-bottom: 10px
+  // flex: 1 1 auto
+  // flex-flow: column;
+  // height: 100%;
+  // position: absolute;
+  // flex-grow: 1
   
 span.clear
   content: ''
   clear: both
   display: block
 
+.list-wrapper
+  height: 100%
+  width: 270px
+  // display: inline-block
+  display: table-cell
+  vertical-align: top
+  // float: left
+  // flex-grow: 1
 
+.list
+  // max-height: 100%
+  // display: inline-block
+  margin: 0 5px
+  // padding: 12px 0 0 0
+  border-radius: 3px
+  box-sizing: border-box
+  color: colors.text-dark
+  width: 270px
+  background-color: colors.list
   
+  .list-cards
+    overflow: auto
+    padding: 0 10px
+    // ul
+    //   li
+    //     background-color: colors.card
+    //     padding: 10px 8px
+    //     border-radius: 3px
+    //     box-shadow: 0 1px 0 colors.card-shadow
+    //     &+li
+    //       margin-top: 7px
+  header
+    font-size: 14px
+    font-weight: bold
+    padding: 10px 12px
+  a
+    &:link
+      color: colors.text-dark-faded
+      text-decoration: none
+    &:visited
+      color: colors.text-dark-faded
+      text-decoration: none
+    &:hover
+      color: colors.text-dark 
+      text-decoration: underline
+    footer
+      padding: 15px 12px 10px 12px
+      &:hover
+        background: colors.list-footer-hover-bg
+        // color: colors.text-dark
+    
+div.card
+  position: relative
+  background-color: colors.card
+  padding: 10px 8px
+  border-radius: 3px
+  box-shadow: 0 1px 0 colors.card-shadow
+  max-width: 300px;
+  min-height: 20px;
+  &+div.card
+    margin-top: 7px
+  .edit
+    display: none
+    position: absolute
+    margin: 3px
+    right: 0px
+    top: 0px
+    background: url('/images/edit-pen.png') no-repeat center
+    background-color: colors.card-hover
+    min-height: 26px
+    min-width: 26px
+    border-radius: 3px
+    opacity: .4
+    &:hover
+      opacity: 1
+      font-size: 14px
+  &:hover
+    background-color: colors.card-hover
+    .edit
+      display: block
+  textarea
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+    color: colors.text-dark 
+    overflow: hidden
+    box-sizing: padding-box
+    word-wrap: break-word
+    resize: none
+    border: none
+    height: auto
+    outline: none
+    width: 100%
+    margin-bottom: 4px
+    // max-height: 162px;
+    // min-height: 32px;
+    -webkit-box-shadow: none
+    -moz-box-shadow: none
+    box-shadow: none
+    padding: 0
+    // &:focus
+    //   border: none;
+      
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus
+  border:none
+  outline:none
+
+.card-composer
+  .add-footer
+    // vertical-align: middle
+    .add
+      width: 60px
+      // height: 30px
+      padding: 8px 12px
+      margin: 8px 0
+      font-size: 14px
+      font-weight: bold
+      background: colors.add-button
+      color: colors.button.text
+      border-radius: 3px
+      border: none
+      box-shadow: 0 1px 0 colors.add-button-shadow
+      float: left
+    .remove
+      min-width: 26px
+      margin: 12px 6px
+      min-height: 26px
+      background: url('/images/close.png') no-repeat center
+      // padding: 10px 0 0 10px
+      opacity: .4
+      float: left
+      &:hover
+        opacity: 1
+  
+  
+  
+.card-composer
+  div.card
+    position: relative
+    background-color: colors.card
+    padding: 10px 8px
+    border-radius: 3px
+    box-shadow: 0 1px 0 colors.card-shadow
+    margin-top: 7px
+
+.add-list
+  height: 40px
+  width: 100%
+  display: block
+  margin: 0 5px
+  padding-left: 12px
+  background: colors.add-list-button
+  color: colors.add-list-text
+  font-size: 14px
+  text-align: left
+  border: none
+  border-radius: 3px
+  &:hover
+    background: colors.add-list-button-hover

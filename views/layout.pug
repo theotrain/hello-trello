@@ -5,6 +5,11 @@ html
   head
     title= title
     +stylesheet_link('style')
+    +js_include('vendor/all')
+    +js_include('handlebars_templates')
+    +js_include('application')
+    //- +js_include('application')
+
   body
     header
       div.search-box
@@ -13,3 +18,27 @@ html
       button.btn.notification
       span.clear
     block content
+
+    +js_include('models/comment')
+    +js_include('models/label')
+    +js_include('collections/comments')
+    +js_include('collections/labels')
+    +js_include('models/card')
+    +js_include('collections/cards')
+    +js_include('models/list')
+    +js_include('collections/lists')
+    +js_include('models/board')
+    +js_include('views/board')
+    +js_include('views/list')
+    +js_include('views/lists')
+    +js_include('views/card')
+
+    script(type='text/javascript').
+      //- alert(!{board})
+      //- alert(!{JSON.stringify(board)});
+      App.init(!{JSON.stringify(board)});
+      //- alert(!{JSON.stringify(board)});
+      //- alert(board);
+      //- alert("heellooo " + boardJSON);
+      //- App.init('crap');
+    //- +js_include('router')
