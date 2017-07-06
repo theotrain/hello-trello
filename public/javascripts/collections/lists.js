@@ -1,8 +1,6 @@
 var ListCollection = Backbone.Collection.extend({
   model: ListModel,
   updateAfterDrop: function($el){
-    console.log('update lists order');
-    console.log($el.children());//list-container
     sortOrder = [];
     $el.children().each(function(idx, listWrapper){
       sortOrder.push($(listWrapper).children().eq(0).attr('data-id'));

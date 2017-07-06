@@ -1,7 +1,6 @@
 var App = {
   templates: JST,
   boardView: function() {
-    // this.board = new BoardView(this.boardJSON);
     this.board = new BoardView(this.boardMdl.toJSON());
     this.lists = new ListsView({ collection: this.boardMdl.get('lists') });
   },
@@ -14,18 +13,12 @@ var App = {
         return !handle.classList.contains('card');
       },
       invalid: function (el, handle) {
-        return el.className === 'nodrag';
+        return el.className === 'add-list';
       }
     })
       .on('drop', function(el, target, source, sibling) {
-        console.log('=======dropped list======');
         this.boardMdl.updateAfterDrop();
-        // console.log(el);
-        // console.log(target);
-        // console.log(source);
-        // console.log(sibling);
-        // on drop:
-        // reorder source list and target list
+        this.save();
       }.bind(this));
 
     this.dragCards = dragula([].slice.apply(document.querySelectorAll('.list-cards')), {
@@ -34,33 +27,24 @@ var App = {
       }
     })
       .on('drop', function(el, target, source, sibling) {
-          console.log('=======dropped card======');
-          console.log(el);
-          console.log(target);
-          console.log(source);
-          console.log(sibling);
-          // console.log('from list: ' + $(source).parent.attr('data-id'));
-          // console.log('from list: ' + source.parentElement.getAttribute('data-id'));
-          // console.dir($(source));
-          // console.log('into list: ' + target.parentElement.getAttribute('data-id'));
           var sourceListId = source.parentElement.getAttribute('data-id');
           var targetListId = target.parentElement.getAttribute('data-id');
-          console.log('sourceId: ' + sourceListId);
-          console.log('targetId: ' + targetListId);
           this.boardMdl.get('lists').get(+sourceListId).updateAfterDrop($(source));
           this.boardMdl.get('lists').get(+targetListId).updateAfterDrop($(target));
-          // this.updateList(source);
-          // this.updateList(target);
-          // on drop:
-          // reorder source list and target list
+          this.save();
         }.bind(this));
   },
-  // makeListDraggable: function(el) {
-  //   this.dragLists.containers.push(el);
-  // },
-  // makeCardDraggable: function(el) {
-  //   this.dragCards.containers.push(el);
-  // },
+  addList: function() {
+    console.log('add list in application');
+    this.boardMdl.addList();
+  },
+  getHighestListId: function() {
+    var ids = [];
+    this.listsColl.each(function(list){
+      ids.push(list.get('id'));
+    });
+    return ids.sort()[ids.length-1] + 1;
+  },
   initEvents: function() {
     $(document)
       .on('focus.autoExpand', 'textarea.autoExpand', function(){
@@ -75,20 +59,51 @@ var App = {
           rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
           this.rows = minRows + rows;
       });
-  },         
-
+  }, 
+  toJSON: function() {
+    return {
+      board: this.boardMdl.toJSON(),
+      lists: this.boardMdl.get('lists').toJSON(),
+      cards: {
+        nextId: this.nextCardId,
+        collection: this.cardsColl.toJSON()
+      }
+    }
+  },
+  setupAutosave: function() {
+    this.cardsColl.on({
+      'add remove': this.save
+    });
+    this.listsColl.on({
+      'add remove': this.save
+    });
+  },       
+  save: function() {
+    console.log('saving .... ');
+    $.ajax({
+      type: 'post',
+      url: '/save',
+      dataType: 'json',
+      crossDomain: true,
+      data: JSON.stringify(App.toJSON()),
+      contentType: 'application/json',
+      success: function(data){
+        // console.log("saved success");
+      }
+    });
+  },
   init: function(boardJSON) {
-    // console.log(boardJSON);   
-    // this.boardJSON = boardJSON;
-    this.cardsColl = new CardCollection(boardJSON.cards.collection);
-    this.listsColl = new ListCollection(boardJSON.lists);
+    _.extend(this, Backbone.Events);
+    this.boardJSON = boardJSON;
+    this.cardsColl = new CardCollection(boardJSON.cards.collection, { silent: true });
+    this.listsColl = new ListCollection(boardJSON.lists, { silent: true });
     this.nextCardId = boardJSON.cards.nextId;
-    this.boardMdl = new BoardModel(boardJSON.board);
+    this.nextListId = this.getHighestListId() + 1;
+    this.boardMdl = new BoardModel(boardJSON.board, { silent: true });
+    this.setupAutosave();
     this.boardView();
+    this.listenTo(this.board, 'addList', this.addList);
     this.initDraggable();
     this.initEvents();
   }
 }
-
-
-

@@ -8,7 +8,6 @@ html
     +js_include('vendor/all')
     +js_include('handlebars_templates')
     +js_include('application')
-    //- +js_include('application')
 
   body
     header
@@ -34,11 +33,5 @@ html
     +js_include('views/card')
 
     script(type='text/javascript').
-      //- alert(!{board})
-      //- alert(!{JSON.stringify(board)});
       App.init(!{JSON.stringify(board)});
-      //- alert(!{JSON.stringify(board)});
-      //- alert(board);
-      //- alert("heellooo " + boardJSON);
-      //- App.init('crap');
-    //- +js_include('router')
+    +js_include('router')

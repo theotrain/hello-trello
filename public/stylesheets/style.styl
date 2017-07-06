@@ -2,23 +2,16 @@
 @import 'mixins'
 @import 'dragula'
 
-// *
-  // box-sizing: border-box
+
 html
   height: 100%
    
 body
-  // padding: 50px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
   background-color: colors.main
   color: colors.text-light
   height: 100%
 
-// a
-//   color: #00B7FF
-// #board
-//   height: 100%
-  
 body > header
   height: 40px
   width: 100%
@@ -98,24 +91,15 @@ body > header
 main
   position: relative;
   height: 100%
-  // -webkit-box-flex: 1;
-  // -webkit-flex-grow: 1;
-  // -ms-flex-positive: 1;
-  // flex-grow: 1
-
+  
 #list-container
   height: 100%
   background-color: colors.main
   color: colors.text-light
   padding: 0 5px 10px 5px
-  overflow-x: auto
   overflow-y: hidden
+  overflow-x: auto
   padding-bottom: 10px
-  // flex: 1 1 auto
-  // flex-flow: column;
-  // height: 100%;
-  // position: absolute;
-  // flex-grow: 1
   
 span.clear
   content: ''
@@ -124,18 +108,12 @@ span.clear
 
 .list-wrapper
   height: 100%
-  width: 270px
-  // display: inline-block
+  min-width: 270px
   display: table-cell
   vertical-align: top
-  // float: left
-  // flex-grow: 1
 
 .list
-  // max-height: 100%
-  // display: inline-block
   margin: 0 5px
-  // padding: 12px 0 0 0
   border-radius: 3px
   box-sizing: border-box
   color: colors.text-dark
@@ -145,14 +123,7 @@ span.clear
   .list-cards
     overflow: auto
     padding: 0 10px
-    // ul
-    //   li
-    //     background-color: colors.card
-    //     padding: 10px 8px
-    //     border-radius: 3px
-    //     box-shadow: 0 1px 0 colors.card-shadow
-    //     &+li
-    //       margin-top: 7px
+    min-height: 10px
   header
     font-size: 14px
     font-weight: bold
@@ -171,7 +142,6 @@ span.clear
       padding: 15px 12px 10px 12px
       &:hover
         background: colors.list-footer-hover-bg
-        // color: colors.text-dark
     
 div.card
   position: relative
@@ -214,14 +184,10 @@ div.card
     outline: none
     width: 100%
     margin-bottom: 4px
-    // max-height: 162px;
-    // min-height: 32px;
     -webkit-box-shadow: none
     -moz-box-shadow: none
     box-shadow: none
     padding: 0
-    // &:focus
-    //   border: none;
       
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus
@@ -230,10 +196,8 @@ div.card
 
 .card-composer
   .add-footer
-    // vertical-align: middle
     .add
       width: 60px
-      // height: 30px
       padding: 8px 12px
       margin: 8px 0
       font-size: 14px
@@ -249,13 +213,10 @@ div.card
       margin: 12px 6px
       min-height: 26px
       background: url('/images/close.png') no-repeat center
-      // padding: 10px 0 0 10px
       opacity: .4
       float: left
       &:hover
         opacity: 1
-  
-  
   
 .card-composer
   div.card

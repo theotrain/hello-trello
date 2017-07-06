@@ -137,8 +137,8 @@ main {
   background-color: #0079bf;
   color: #f6f6f6;
   padding: 0 5px 10px 5px;
-  overflow-x: auto;
   overflow-y: hidden;
+  overflow-x: auto;
   padding-bottom: 10px;
 }
 span.clear {
@@ -148,7 +148,7 @@ span.clear {
 }
 .list-wrapper {
   height: 100%;
-  width: 270px;
+  min-width: 270px;
   display: table-cell;
   vertical-align: top;
 }
@@ -163,6 +163,7 @@ span.clear {
 .list .list-cards {
   overflow: auto;
   padding: 0 10px;
+  min-height: 10px;
 }
 .list header {
   font-size: 14px;
