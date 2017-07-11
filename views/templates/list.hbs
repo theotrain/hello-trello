@@ -1,5 +1,11 @@
 <div class="list" data-id="{{id}}">
-  <header>{{name}}</header>
+  {{!-- <header>{{name}}</header> --}}
+  <header>
+    <div class="list-name">{{name}}</div>
+    <form action="#">
+      <textarea class="autoExpand" rows="1">{{name}}</textarea>
+    </form>
+  </header>
   <div class="list-cards">
     {{!-- cards looped here --}}
   </div>

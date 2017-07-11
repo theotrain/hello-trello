@@ -7,6 +7,7 @@ html
     +stylesheet_link('style')
     +js_include('vendor/all')
     +js_include('handlebars_templates')
+    +js_include('vendor/autosize.min')
     +js_include('application')
 
   body
@@ -28,9 +29,11 @@ html
     +js_include('collections/lists')
     +js_include('models/board')
     +js_include('views/board')
+    +js_include('views/add_list')
     +js_include('views/list')
     +js_include('views/lists')
     +js_include('views/card')
+    +js_include('views/edit_card_window')
 
     script(type='text/javascript').
       App.init(!{JSON.stringify(board)});

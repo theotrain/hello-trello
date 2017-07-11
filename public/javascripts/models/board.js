@@ -14,13 +14,15 @@ var BoardModel = Backbone.Model.extend({
     this.unset('lists');
     this.createLists(listsArray);
   },
-  addList: function() {
-    App.listsColl.add({
-      id: App.nextListId
+  addList: function(name) {
+    this.get('lists').add({
+      id: App.nextListId,
+      name: name
     });
 
-    this.get('lists').add({
-      id: App.nextListId
+    App.listsColl.add({
+      id: App.nextListId,
+      name: name
     });
 
     App.nextListId += 1;

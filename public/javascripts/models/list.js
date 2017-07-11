@@ -4,7 +4,6 @@ var ListModel = Backbone.Model.extend({
     cards: []
   },
   createCards: function(cardsArray) {
-    // this.cardsArray = cardsArray;
     var cc = new CardCollection();
     cardsArray.forEach(function(idx) {
       cc.add(App.cardsColl.findWhere({ id: idx }));
@@ -16,12 +15,14 @@ var ListModel = Backbone.Model.extend({
     console.log('ud after drop');
     var cardsArray = [];
     $el.children().each(function(idx,div){
-      // console.log(cardDiv.attr('data-id'));
       cardsArray.push(+$(div).attr('data-id'));
     });
     console.log(cardsArray);
     this.unset('cards');
     this.createCards(cardsArray);
+  },
+  changeName: function(name) {
+    this.set('name', name);
   },
   cardsArray: function() {
     var cardsArr = [],
@@ -51,7 +52,5 @@ var ListModel = Backbone.Model.extend({
   initialize: function(json) {
     this.set('name', this.get('name') || json.name);
     this.createCards(this.get('cards') || json.cards);
-    // this.set('cards', new CardCollection({array: json.cards}));
-    // this.cardsArray = json.cards;
   }
 });

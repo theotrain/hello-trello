@@ -2,6 +2,9 @@
 @import 'mixins'
 @import 'dragula'
 
+// @font-face 
+//   font-family: trellicons;
+//   src: url(/fonts/trellicons.woff);
 
 html
   height: 100%
@@ -11,6 +14,8 @@ body
   background-color: colors.main
   color: colors.text-light
   height: 100%
+  width: 100%
+  overflow: hidden
 
 body > header
   height: 40px
@@ -87,19 +92,26 @@ body > header
   font-weight: bold
   line-height: 45px
   padding: 0 18px;
-
+  
 main
   position: relative;
   height: 100%
+  // overflow-x: scroll
+  // width: 100%
+  
   
 #list-container
-  height: 100%
-  background-color: colors.main
+  box-sizing: border-box
+  // height: 100%
+  // background-color: colors.main
+  // background-color: red
   color: colors.text-light
-  padding: 0 5px 10px 5px
-  overflow-y: hidden
+  padding: 0 5px 25px 5px
   overflow-x: auto
-  padding-bottom: 10px
+  display: table
+  // vertical-align: top
+  // width: 100%
+  // height: 500px
   
 span.clear
   content: ''
@@ -107,9 +119,9 @@ span.clear
   display: block
 
 .list-wrapper
-  height: 100%
-  min-width: 270px
   display: table-cell
+  min-width: 270px
+  background: green
   vertical-align: top
 
 .list
@@ -119,15 +131,58 @@ span.clear
   color: colors.text-dark
   width: 270px
   background-color: colors.list
+  // max-height: 100%
+  // height: 150px;
   
   .list-cards
-    overflow: auto
+    // display: block
+    overflow-y: auto
     padding: 0 10px
     min-height: 10px
+    // height: 100px
   header
     font-size: 14px
     font-weight: bold
-    padding: 10px 12px
+    padding: 7px 6px 6px 6px
+  // .list-header
+  //   // background: none
+  //   // border: none
+  //   padding: 5px 6px
+    // font-size: 14px
+    form
+      display: none
+    textarea
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+      font-weight: bold
+      resize: none
+      // background-color: white
+      outline: none
+      border: none
+      padding 3px 5px
+      border-radius: 3px
+      width: 230px
+      // height: auto
+      overflow: none
+    .list-name
+      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+      font-weight: bold
+      // resize: none
+      // background-color: white
+      outline: none
+      border: none
+      padding 3px 5px
+      border-radius: 3px
+      width: 230px
+      cursor: pointer
+      
+      // background-color: rgba(0,0,0,0)
+      // -webkit-user-select: none;
+      // -khtml-user-select: none;
+      // -moz-user-select: none;
+      // -ms-user-select: none;
+      // -o-user-select: none;
+      // user-select: none;
+      
   a
     &:link
       color: colors.text-dark-faded
@@ -149,8 +204,9 @@ div.card
   padding: 10px 8px
   border-radius: 3px
   box-shadow: 0 1px 0 colors.card-shadow
-  max-width: 300px;
-  min-height: 20px;
+  max-width: 300px
+  min-height: 20px
+  cursor: pointer
   &+div.card
     margin-top: 7px
   .edit
@@ -175,12 +231,12 @@ div.card
   textarea
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
     color: colors.text-dark 
-    overflow: hidden
+    overflow: none
     box-sizing: padding-box
-    word-wrap: break-word
+    // word-wrap: break-word
     resize: none
     border: none
-    height: auto
+    // height: auto
     outline: none
     width: 100%
     margin-bottom: 4px
@@ -188,6 +244,17 @@ div.card
     -moz-box-shadow: none
     box-shadow: none
     padding: 0
+    
+    // font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+    // font-weight: bold
+    // resize: none
+    // outline: none
+    // border: none
+    // padding 3px 5px
+    // border-radius: 3px
+    // width: 248px
+    // overflow: none
+      
       
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus
@@ -229,7 +296,7 @@ div.card
 
 .add-list
   height: 40px
-  width: 100%
+  width: 270px
   display: block
   margin: 0 5px
   padding-left: 12px
@@ -241,3 +308,234 @@ div.card
   border-radius: 3px
   &:hover
     background: colors.add-list-button-hover
+  &:focus
+    outline: none
+    
+.add-list-form
+  display: none;
+  margin: 0 5px
+  padding: 4px 4px 0 4px
+  border-radius: 3px
+  box-sizing: border-box
+  color: colors.text-dark
+  width: 270px
+  background-color: colors.list
+  &:after
+    content: ''
+    clear: both
+    display: block
+  input
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+    color: colors.text-dark 
+    padding: 9px 
+    overflow: hidden
+    box-sizing: border-box
+    word-wrap: break-word
+    resize: none
+    border: 1px solid colors.add-list-input-border
+    border-radius: 3px
+    background: colors.add-list-input-inner
+    -webkit-box-shadow: inset 0px 0px 20px 1px rgba(0,0,0,0.1)
+    -moz-box-shadow: inset 0px 0px 20px 1px rgba(0,0,0,0.1)
+    box-shadow: inset 0px 0px 20px 1px rgba(0,0,0,0.1)
+    // height: auto
+    outline: none
+    width: 100%
+    // margin-bottom: 4px
+    // -webkit-box-shadow: none
+    // -moz-box-shadow: none
+    // box-shadow: none
+  .add-footer
+    .add
+      width: 60px
+      padding: 8px 12px
+      margin: 4px 0 0 0
+      font-size: 14px
+      font-weight: bold
+      background: colors.add-button
+      color: colors.button.text
+      border-radius: 3px
+      border: none
+      outline: none
+      box-shadow: 0 1px 0 colors.add-button-shadow
+      float: left
+    .remove
+      min-width: 26px
+      margin: 8px 6px
+      min-height: 26px
+      background: url('/images/close.png') no-repeat center
+      opacity: .4
+      float: left
+      &:hover
+        opacity: 1
+
+.modal
+  z-index: 1
+  width: 100%
+  height: 100%
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed
+  left: 0
+  overflow: auto
+  // right: 0
+  top: 0
+  // bottom: 0
+           
+.modal-content
+  width: 730px
+  // min-height: 200px
+  margin: 48px auto auto auto
+  position: relative
+  z-index: 2
+  border-radius: 3px
+  background: colors.modal.bg
+  color: colors.text-dark
+  h2
+    font-size: 18px
+    font-weight: bold
+  header
+    padding: 20px 50px 5px 48px
+    // background-color: red
+    background: no-repeat url('/images/detail-icon.jpg')
+    background-position: left 15px top 20px
+  .close
+    min-width: 26px
+    min-height: 26px
+    top: 10px
+    right: 10px
+    position: absolute
+    background: url('/images/close.png') no-repeat center
+    opacity: .4
+    &:hover
+      opacity: 1
+  main
+    width: 575px
+    padding: 15px 25px 15px 15px
+    box-sizing: border-box
+    float: left
+    // background-color: #ddeebb
+    h5
+      color: colors.text-dark-faded
+      font-weight: normal
+    .card-detail-labels
+      padding-left: 34px
+      .label-list
+        margin-top: 8px
+        .label
+          vertical-align: top
+          height: 18px
+          min-width: 35px
+          display: inline-block
+          padding: 7px 10px
+          font-weight: bold
+          color: white
+          border-radius: 3px
+          text-shadow: 0 0 4px rgba(0, 0, 0, 0.5)
+          &+.label
+            margin-left: 5px
+      // background-color: #888
+    .card-detail-description
+      padding-left: 34px
+      margin-top: 28px
+      p
+        margin-top: 9px
+      // background-color: #ccc
+    .add-comment
+      margin-top: 23px
+      padding: 0 0 0 34px
+      background: no-repeat url('/images/add-comment-icon.jpg')
+      // background-position:
+      // background-color: #d5d5d5
+      form
+        text-align: right
+        margin-top: 10px
+        textarea
+          width: 100%
+          padding: 10px
+          color: colors.text-dark 
+          font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+          border: none
+          border-radius: 3px
+          resize: none
+          outline: none
+          box-sizing: border-box
+          box-shadow: 0 1px 0 colors.card-shadow
+        button.comment
+          font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+          // color: colors.text-dark
+          width: 60px
+          padding: 8px 12px
+          margin: 8px 0
+          font-size: 14px
+          font-weight: bold
+          background: colors.add-button
+          color: colors.button.text
+          border-radius: 3px
+          border: none
+        button.disabled
+          background-color: colors.modal.disabled
+          color: colors.text-dark-faded
+          box-shadow: none
+          cursor: default
+    .comments
+      padding-left: 34px
+      padding-bottom: 15px
+      // background-color: #666
+      background: no-repeat url('/images/comments-icon.jpg')
+  .sidebar
+    width: 155px
+    padding: 8px 12px 12px 0
+    // background-color: green
+    float:right
+    box-sizing: border-box
+    .card-detail-btn-group
+      &+.card-detail-btn-group
+        margin-top: 30px
+      h2
+        margin-bottom: 6px
+      button
+        text-align: left
+        width: 100%
+        padding: 7px 10px
+        color: colors.text-dark
+        height: 33px
+        font-size: 15px
+        font-weight: bold
+        border-radius: 3px
+        border: 1px solid colors.modal.btn-outline
+        box-shadow: 0 1px 0 colors.modal.btn-outline
+        background: #ffffff; /* Old browsers */
+        background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%) /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 100%) /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #ffffff 0%,#f9f9f9 100%) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        &:hover
+          background: colors.modal.btn-hover
+          color: white
+          border: none
+          box-shadow: 0 1px 0 rgba(0,0,0,0.3)
+        &+button
+          margin-top: 6px
+  &:after
+    clear: both
+    display: block
+    content: '' 
+   
+    
+//     <header>Title goes here</header>
+// <main>
+//   <div class="card-detail-labels">
+//     labels here
+//   </div>
+//   <div class="card-detail-description">
+//     description here
+//   </div>
+//   <div class="add-comment">
+//     comment add form here
+//   </div>
+//   <div class="comments">
+//     comments here
+//   </div>
+// </main>
+// <div class=".sidebar">
+//   sidebar contents here
+// </div>

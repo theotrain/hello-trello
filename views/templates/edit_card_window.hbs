@@ -1,0 +1,45 @@
+<div class="modal">
+  <div class="modal-content">
+    <header><h2>{{title}}</h2></header>
+    <div class="close"></div>
+    <main>
+      <div class="card-detail-labels">
+        <h5>Labels</h5>
+        <div class="label-list">
+          <span class="label" style="background:#ffee00">sahara</span>
+          <span class="label" style="background:#ff7733"></span>
+          <span class="label" style="background:#66ff99">green apple</span>
+        </div>
+      </div>
+      <div class="card-detail-description">
+        <h5>Description <a href="#">Edit</a></h5>
+        <p>{{descriptiom}}</p>
+      </div>
+      <div class="add-comment">
+        <h2>Add Comment</h2>
+        <form action="#">
+          <textarea rows="3" placeholder="write a comment..."></textarea>
+          <button class="comment disabled">Send</button>
+        </form>
+      </div>
+      <div class="comments">
+        <h2>Comments</h2>
+        comments here
+      </div>
+    </main>
+    <div class="sidebar">
+      <div class="card-detail-btn-group">
+        <h2>Add</h2>
+        <button>Labels</button>
+        <button>Due Date</button>
+      </div>
+      <div class="card-detail-btn-group">
+        <h2>Actions</h2>
+        <button>Move</button>
+        <button>Copy</button>
+        <button>Subscribe</button>
+        <button>Archive</button>
+      </div>
+    </div>
+  </div>
+</div>

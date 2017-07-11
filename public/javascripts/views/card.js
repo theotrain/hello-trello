@@ -1,6 +1,13 @@
 var CardView = Backbone.View.extend({
   className: 'card',
   template: App.templates.card,
+  events: {
+    'click' : 'clickCard'
+  },
+  clickCard: function() {
+    // console.log('click card');
+    App.editCardWindowView(this.model);
+  },
   attributes: function() {
     return {
       "data-id": this.model.get('id'),
