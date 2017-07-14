@@ -1,10 +1,15 @@
 var CardModel = Backbone.Model.extend({
   defaults: {
-    title: 'this is a default card',
-    description: 'default description'
+    title: '',
+    description: '',
+    labels: []
+  },
+  triggerChange: function() {
+    this.trigger('change');
   },
   initialize: function(options) {
     this.set('comments', new CommentCollection(options.comments || []));
-    this.set('labels', new LabelCollection(options.labels || []));
+    this.listenTo(this.get('comments'), 'all', this.triggerChange);
+    this.listenTo(this.get('labels'), 'all', this.triggerChange);
   }
 });

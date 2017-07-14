@@ -7,7 +7,7 @@ html
     +stylesheet_link('style')
     +js_include('vendor/all')
     +js_include('handlebars_templates')
-    +js_include('vendor/autosize.min')
+    +js_include('vendor/datepicker-english')
     +js_include('application')
 
   body
@@ -34,6 +34,9 @@ html
     +js_include('views/lists')
     +js_include('views/card')
     +js_include('views/edit_card_window')
+    +js_include('views/list_menu')
+    +js_include('views/date')
+    +js_include('views/labels')
 
     script(type='text/javascript').
       App.init(!{JSON.stringify(board)});

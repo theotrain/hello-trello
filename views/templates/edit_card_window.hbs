@@ -1,44 +1,72 @@
 <div class="modal">
   <div class="modal-content">
-    <header><h2>{{title}}</h2></header>
+    <header>
+      <textarea class="disabled">
+        {{title}}
+      </textarea>
+    </header>
     <div class="close"></div>
     <main>
+      {{#if hasLabels}}
       <div class="card-detail-labels">
         <h5>Labels</h5>
         <div class="label-list">
-          <span class="label" style="background:#ffee00">sahara</span>
-          <span class="label" style="background:#ff7733"></span>
-          <span class="label" style="background:#66ff99">green apple</span>
+          {{!-- add labels --}}
         </div>
       </div>
+      {{/if}}
+      {{#if due}}
+      <div class="card-due-date">
+        <h5>Due Date</h5>
+        <div class="due-link">
+          {{format_date due}}
+        </div>
+      </div>
+      {{/if}}
       <div class="card-detail-description">
         <h5>Description <a href="#">Edit</a></h5>
-        <p>{{descriptiom}}</p>
+        <p>{{description}}</p>
+        <form action="#">
+          <textarea placeholder="Add a more detailed description...">{{description}}</textarea>
+          <div class="add-footer">
+            <button type="submit" class="add">Save</button>
+            <div class="remove"></div>
+          </div>
+        </form>
       </div>
       <div class="add-comment">
         <h2>Add Comment</h2>
         <form action="#">
-          <textarea rows="3" placeholder="write a comment..."></textarea>
+          <textarea rows="3" placeholder="Write a comment..."></textarea>
           <button class="comment disabled">Send</button>
         </form>
       </div>
       <div class="comments">
         <h2>Comments</h2>
-        comments here
+        {{#each comments}}
+        <div class="comment">
+          <div class="comment-body">
+            {{body}}
+          </div>
+          <div class="comment-date">
+            {{format_date date}}
+          </div>
+        </div>
+        {{/each}}
       </div>
     </main>
     <div class="sidebar">
       <div class="card-detail-btn-group">
         <h2>Add</h2>
-        <button>Labels</button>
-        <button>Due Date</button>
+        <button class="edit-labels">Labels</button>
+        <button class="due">Due Date</button>
       </div>
       <div class="card-detail-btn-group">
         <h2>Actions</h2>
-        <button>Move</button>
-        <button>Copy</button>
-        <button>Subscribe</button>
-        <button>Archive</button>
+        <button disabled>Move</button>
+        <button disabled>Copy</button>
+        <button disabled>Subscribe</button>
+        <button class="delete">Delete</button>
       </div>
     </div>
   </div>

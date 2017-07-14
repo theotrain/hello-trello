@@ -1,1 +1,24 @@
-{"board":{"name":"board housewife","lists":[2,1]},"lists":[{"id":2,"name":"Brads List oidjosdijf osidjf osijdf osijdf oisjf fdoisjodifj soidjf osidjf chiuhz iouch iuzxhci uzhc iz","cards":[4,5]},{"id":1,"name":"Angies List fsdf sdf  sdjfsiodj foisjdofisj dofi fpsoidfposjdpfoijsodifj so","cards":[1,2,3,6]}],"cards":{"nextId":7,"collection":[{"title":"this is a card.  its the first one and also the longest on i have in my collection.  do you like it?","description":"a description of some description","id":1,"comments":[{"body":"hi comment!","date":1498573380298},{"body":"i like it","date":1498573380298}],"labels":[]},{"title":"this is the second card","description":"a testing description","id":2,"comments":[{"body":"hi comment!","date":1498573380298},{"body":"i like it","date":1498573380298}],"labels":[]},{"title":"third child","description":"is unwanted in our society","id":3,"comments":[{"body":"i can comment!","date":1498573380298},{"body":"its a free country","date":1498573380298}],"labels":[]},{"title":"this is the fourth card","description":"a testing description","id":4,"comments":[{"body":"hi comment!","date":1498573380298},{"body":"i like it","date":1498573380298}],"labels":[]},{"title":"fifth child","description":"is always the best policy description","id":5,"comments":[{"body":"i can comment!","date":1498573380298},{"body":"its a free country","date":1498573380298}],"labels":[]},{"title":"asdasd","description":"default description","id":6,"comments":[],"labels":[]}]}}
+{
+  "board": {
+    "name":"board housewife",
+    "lists":[1, 2]
+  },
+  "lists": [
+    {"id":1,"name":"Angies List","cards":[1,2,3]},
+    {"id":2,"name":"Brads List","cards":[4,5]}
+  ],
+  "cards": {
+    "nextId": 6,
+    "collection": [{"id":1,"title":"this is a card.  its the first one and also the longest on i have in my collection.  do you like it?","description":"a description of some description","due":1499985420000,"labels":[1,2,3],"comments":[{"body":"hi comment!","date":1498573380298},{"body":"i like it","date":1498573380298}]},{"id":2,"title":"this is the second card","description":"a testing description","due":null,"labels":[],"comments":[{"body":"hi comment!","date":1498573380298},{"body":"i like it","date":1498573380298}]},{"id":3,"title":"third child","description":"is unwanted in our society","due":null,"labels":[],"comments":[]},{"id":4,"title":"this is the fourth card","description":"a testing description","due":null,"labels":[4,5],"comments":[{"body":"hi comment!","date":1498573380298},{"body":"i like it","date":1498573380298}]},{"id":5,"title":"fifth child","description":"is always the best policy description","due":null,"labels":[1,3,5],"comments":[{"body":"i can comment!","date":1498573380298},{"body":"its a free country","date":1498573380298}]}]
+  },
+  "labels": {
+    "nextId": 6,
+    "collection": [
+       {"id":1, "name":"Vacation", "color":"#ff2200"},
+       {"id":2, "name":"Booty Call", "color":"#ddddff"},
+       {"id":3, "name":"Recreational Drugs", "color":"#ffdd00"},
+       {"id":4, "name":"Launch", "color":"#00ff33"},
+       {"id":5, "name":"Work", "color":"#00eeee"}
+    ]
+  }
+}

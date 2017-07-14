@@ -7,10 +7,6 @@ module.exports = {
     return JSON.parse(fs.readFileSync(file_path, 'utf8'));
   },
 
-  // getLastID: function() {
-  //   return this.__readFile().last_id;
-  // },
-
   get: function() {
     return this.__readFile();
   },

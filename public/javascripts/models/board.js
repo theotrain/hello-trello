@@ -26,9 +26,7 @@ var BoardModel = Backbone.Model.extend({
     });
 
     App.nextListId += 1;
-
-    App.boardView();
-    App.initDraggable();
+    App.resetBoard();
   },
   listsArray: function() {
     var listsArr = [],

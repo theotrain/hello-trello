@@ -1,4 +1,5 @@
 @import 'whitespace-reset.css';
+@import 'datepicker.min.css';
 .gu-mirror {
   position: fixed !important;
   box-sizing: border-box !important;
@@ -18,6 +19,9 @@
 .gu-transit {
   background-color: #c4c9cc !important;
   color: #c4c9cc !important;
+}
+.gu-transit .card-labels {
+  visibility: hidden;
 }
 .list-wrapper.gu-transit {
   background-color: #0079bf !important;
@@ -44,9 +48,10 @@ body {
   color: #f6f6f6;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 body > header {
+  overflow-x: hidden;
   height: 40px;
   width: 100%;
   background: no-repeat center url("/images/hello.png");
@@ -132,12 +137,20 @@ body > header .notification {
 }
 main {
   position: relative;
-  height: 100%;
+  overflow-x: auto;
+}
+#scrollbar-style::-webkit-scrollbar {
+  background-color: #00649e;
+  border-radius: 3px;
+}
+#scrollbar-style::-webkit-scrollbar-thumb {
+  background-color: #66a4c7;
+  border-radius: 3px;
 }
 #list-container {
   box-sizing: border-box;
   color: #f6f6f6;
-  padding: 0 5px 25px 5px;
+  padding: 0 5px 10px 5px;
   overflow-x: auto;
   display: table;
 }
@@ -149,7 +162,6 @@ span.clear {
 .list-wrapper {
   display: table-cell;
   min-width: 270px;
-  background: #008000;
   vertical-align: top;
 }
 .list {
@@ -159,6 +171,7 @@ span.clear {
   color: #4d4d4d;
   width: 270px;
   background-color: #e2e4e6;
+  position: relative;
 }
 .list .list-cards {
   overflow-y: auto;
@@ -170,52 +183,66 @@ span.clear {
   font-weight: bold;
   padding: 7px 6px 6px 6px;
 }
-.list form {
+.list header form {
   display: none;
 }
-.list textarea {
+.list header textarea {
+  border-radius: 3px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: bold;
   resize: none;
   outline: none;
   border: none;
   padding: 3px 5px;
-  border-radius: 3px;
-  width: 230px;
+  width: 220px;
   overflow: none;
 }
-.list .list-name {
+.list header .list-name {
+  border-radius: 3px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-weight: bold;
   outline: none;
   border: none;
   padding: 3px 5px;
-  border-radius: 3px;
-  width: 230px;
+  width: 220px;
   cursor: pointer;
 }
-a:link {
+.list header .more {
+  min-height: 26px;
+  min-width: 26px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: url("/images/more.png") no-repeat center;
+}
+.list header .more:hover {
+  background-color: #cdd2d4;
+}
+.list a {
+  outline: none;
+}
+.list a:link {
   color: #8c8c8c;
   text-decoration: none;
 }
-a:visited {
+.list a:visited {
   color: #8c8c8c;
   text-decoration: none;
 }
-a:hover {
+.list a:hover {
   color: #4d4d4d;
   text-decoration: underline;
 }
-a footer {
+.list a footer {
   padding: 15px 12px 10px 12px;
 }
-a footer:hover {
+.list a footer:hover {
   background: #cdd2d4;
 }
 div.card {
   position: relative;
   background-color: #fff;
-  padding: 10px 8px;
+  padding: 5px 8px 10px 8px;
   border-radius: 3px;
   box-shadow: 0 1px 0 #ccc;
   max-width: 300px;
@@ -262,6 +289,17 @@ div.card textarea {
   -moz-box-shadow: none;
   box-shadow: none;
   padding: 0;
+}
+div.card .card-labels {
+  margin: 0 0 5px 0;
+  pointer-events: none;
+}
+div.card .card-labels .label {
+  min-height: 8px;
+  min-width: 42px;
+  margin-right: 3px;
+  display: inline-block;
+  border-radius: 3px;
 }
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus {
@@ -335,6 +373,7 @@ div.card textarea {
   display: block;
 }
 .add-list-form input {
+  border-radius: 3px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #4d4d4d;
   padding: 9px;
@@ -343,7 +382,6 @@ div.card textarea {
   word-wrap: break-word;
   resize: none;
   border: 1px solid #aaa;
-  border-radius: 3px;
   background: #cccdcf;
   -webkit-box-shadow: inset 0px 0px 20px 1px rgba(0,0,0,0.1);
   -moz-box-shadow: inset 0px 0px 20px 1px rgba(0,0,0,0.1);
@@ -396,13 +434,28 @@ div.card textarea {
   color: #4d4d4d;
 }
 .modal-content h2 {
-  font-size: 18px;
   font-weight: bold;
 }
 .modal-content header {
-  padding: 20px 50px 5px 48px;
+  padding: 17px 50px 5px 45px;
+  font-size: 18px;
+  min-height: 30px;
   background: no-repeat url("/images/detail-icon.jpg");
   background-position: left 15px top 20px;
+}
+.modal-content header textarea {
+  color: #4d4d4d;
+  padding: 3px 5px;
+  border-radius: 3px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  border: none;
+  resize: none;
+  outline: none;
+  width: 95%;
+}
+.modal-content header textarea.disabled {
+  background: none;
 }
 .modal-content .close {
   min-width: 26px;
@@ -418,7 +471,7 @@ div.card textarea {
 }
 .modal-content main {
   width: 575px;
-  padding: 15px 25px 15px 15px;
+  padding: 0 25px 15px 15px;
   box-sizing: border-box;
   float: left;
 }
@@ -428,6 +481,7 @@ div.card textarea {
 }
 .modal-content main .card-detail-labels {
   padding-left: 34px;
+  margin-bottom: 28px;
 }
 .modal-content main .card-detail-labels .label-list {
   margin-top: 8px;
@@ -448,13 +502,89 @@ div.card textarea {
 }
 .modal-content main .card-detail-description {
   padding-left: 34px;
-  margin-top: 28px;
 }
 .modal-content main .card-detail-description p {
-  margin-top: 9px;
+  margin-top: 7px;
+  cursor: pointer;
+}
+.modal-content main .card-detail-description a {
+  text-decoration: underline;
+}
+.modal-content main .card-detail-description form {
+  display: none;
+  margin-top: 10px;
+  padding: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #4d4d4d;
+}
+.modal-content main .card-detail-description form:after {
+  content: '';
+  clear: both;
+  display: block;
+}
+.modal-content main .card-detail-description form textarea {
+  border-radius: 3px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #4d4d4d;
+  padding: 9px;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  resize: none;
+  border: 1px solid #ccc;
+  background: #e5e7e8;
+  -webkit-box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.07);
+  -moz-box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.07);
+  box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.07);
+  outline: none;
+  width: 100%;
+}
+.modal-content main .card-detail-description form .add-footer .add {
+  width: 60px;
+  padding: 8px 12px;
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  font-weight: bold;
+  background: #5fb74b;
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  box-shadow: 0 1px 0 #3f6f21;
+  float: left;
+}
+.modal-content main .card-detail-description form .add-footer .remove {
+  min-width: 26px;
+  margin: 8px 6px;
+  min-height: 26px;
+  background: url("/images/close.png") no-repeat center;
+  opacity: 0.4;
+  float: left;
+}
+.modal-content main .card-detail-description form .add-footer .remove:hover {
+  opacity: 1;
+}
+.modal-content main .card-due-date {
+  padding-left: 34px;
+  margin-bottom: 20px;
+}
+.modal-content main .card-due-date .due-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 7px;
+  background: #e2e4e6;
+  color: #8c8c8c;
+  text-decoration: underline;
+}
+.modal-content main .card-due-date .due-link:hover {
+  color: #4d4d4d;
+  background: #d6dadc;
+  cursor: pointer;
 }
 .modal-content main .add-comment {
-  margin-top: 23px;
+  margin-top: 27px;
   padding: 0 0 0 34px;
   background: no-repeat url("/images/add-comment-icon.jpg");
 }
@@ -466,9 +596,9 @@ div.card textarea {
   width: 100%;
   padding: 10px;
   color: #4d4d4d;
+  border-radius: 3px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   border: none;
-  border-radius: 3px;
   resize: none;
   outline: none;
   box-sizing: border-box;
@@ -494,8 +624,31 @@ div.card textarea {
 }
 .modal-content main .comments {
   padding-left: 34px;
-  padding-bottom: 15px;
+  padding-bottom: 12px;
   background: no-repeat url("/images/comments-icon.jpg");
+}
+.modal-content main .comments h2,
+.modal-content main .comments .comment {
+  padding: 12px 0 12px 0;
+}
+.modal-content main .comments h2+.comment,
+.modal-content main .comments .comment+.comment {
+  border-top: 1px solid #e2e4e6;
+}
+.modal-content main .comments h2 .comment-body,
+.modal-content main .comments .comment .comment-body {
+  margin-bottom: 10px;
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #fff;
+  padding: 10px 8px;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 #ccc;
+}
+.modal-content main .comments h2 .comment-date,
+.modal-content main .comments .comment .comment-date {
+  color: #8c8c8c;
+  font-size: 12px;
 }
 .modal-content .sidebar {
   width: 155px;
@@ -510,16 +663,17 @@ div.card textarea {
   margin-bottom: 6px;
 }
 .modal-content .sidebar .card-detail-btn-group button {
-  text-align: left;
   width: 100%;
   padding: 7px 10px;
   color: #4d4d4d;
   height: 33px;
   font-size: 15px;
   font-weight: bold;
+  text-align: left;
   border-radius: 3px;
   border: 1px solid #e2e4e6;
   box-shadow: 0 1px 0 #e2e4e6;
+  outline: none;
   background: #fff;
 /* Old browsers */
   background: -moz-linear-gradient(top, #fff 0%, #f9f9f9 100%) /* FF3.6-15 */;
@@ -532,6 +686,19 @@ div.card textarea {
   border: none;
   box-shadow: 0 1px 0 rgba(0,0,0,0.3);
 }
+.modal-content .sidebar .card-detail-btn-group button:disabled {
+  opacity: 0.5;
+}
+.modal-content .sidebar .card-detail-btn-group button:disabled:hover {
+  background: #fff;
+/* Old browsers */
+  background: -moz-linear-gradient(top, #fff 0%, #f9f9f9 100%) /* FF3.6-15 */;
+  background: -webkit-linear-gradient(top, #fff 0%, #f9f9f9 100%) /* Chrome10-25,Safari5.1-6 */;
+  background: linear-gradient(to bottom, #fff 0%, #f9f9f9 100%) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */;
+  color: inherit;
+  border: 1px solid #e2e4e6;
+  box-shadow: 0 1px 0 #e2e4e6;
+}
 .modal-content .sidebar .card-detail-btn-group button+button {
   margin-top: 6px;
 }
@@ -539,4 +706,216 @@ div.card textarea {
   clear: both;
   display: block;
   content: '';
+}
+#popup {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+#date-view {
+  width: 275px;
+  padding: 10px;
+  color: #4d4d4d;
+  background: #fff;
+  border-radius: 3px;
+  z-index: 10;
+  position: absolute;
+  box-sizing: border-box;
+  border: #ccc;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+}
+#date-view .close {
+  min-width: 26px;
+  min-height: 26px;
+  top: 5px;
+  right: 4px;
+  position: absolute;
+  background: url("/images/close.png") no-repeat center;
+  background-size: 70%;
+  opacity: 0.4;
+}
+#date-view .close:hover {
+  opacity: 1;
+}
+#date-view header {
+  color: #8c8c8c;
+  padding: 0 0 8px 0;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+#date-view .date-entry-section {
+  margin-top: 10px;
+}
+#date-view .date-entry-section .date-entry {
+  box-sizing: border-box;
+  font-weight: bold;
+  color: #4d4d4d;
+  width: 40%;
+  display: inline-block;
+}
+#date-view .date-entry-section .date-entry+.date-entry {
+  margin-left: 30px;
+}
+#date-view .date-entry-section .date-entry input {
+  border-radius: 3px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px;
+  margin-top: 5px;
+  color: #4d4d4d;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+#date-view .date-buttons:after {
+  clear: both;
+  display: block;
+  content: '';
+}
+#date-view .date-buttons button {
+  width: 90px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+#date-view .date-buttons button.save {
+  background: #5fb74b;
+  box-shadow: 0 1px 0 #3f6f21;
+  color: #fff;
+  float: left;
+}
+#date-view .date-buttons button.remove {
+  background: #e2e4e6;
+  box-shadow: 0 1px 0 #ccc;
+  color: #b04632;
+  float: right;
+}
+#date-view .date-buttons button:hover {
+  box-shadow: inset 0 0 0 99px rgba(0,0,0,0.1);
+}
+.datepicker {
+  margin: 15px auto 8px auto;
+}
+#list-menu-view {
+  width: 240px;
+  color: #4d4d4d;
+  background: #fff;
+  border-radius: 3px;
+  z-index: 10;
+  position: absolute;
+  box-sizing: border-box;
+  border: #ccc;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+}
+#list-menu-view .close {
+  min-width: 26px;
+  min-height: 26px;
+  top: 5px;
+  right: 4px;
+  position: absolute;
+  background: url("/images/close.png") no-repeat center;
+  background-size: 70%;
+  opacity: 0.4;
+}
+#list-menu-view .close:hover {
+  opacity: 1;
+}
+#list-menu-view header {
+  color: #8c8c8c;
+  padding: 10px 10px 8px 10px;
+  margin: 0 10px 10px 10px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+#list-menu-view .list-menu-section {
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+#list-menu-view .list-menu-section .list-menu-item {
+  padding: 7px 10px;
+  font-weight: bold;
+  color: #4d4d4d;
+  cursor: pointer;
+}
+#list-menu-view .list-menu-section .list-menu-item:hover {
+  background: #298fca;
+  color: #fff;
+}
+#labels-view {
+  width: 280px;
+  color: #4d4d4d;
+  background: #fff;
+  border-radius: 3px;
+  z-index: 10;
+  position: absolute;
+  box-sizing: border-box;
+  border: #ccc;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+}
+#labels-view .close {
+  min-width: 26px;
+  min-height: 26px;
+  top: 5px;
+  right: 4px;
+  position: absolute;
+  background: url("/images/close.png") no-repeat center;
+  background-size: 70%;
+  opacity: 0.4;
+}
+#labels-view .close:hover {
+  opacity: 1;
+}
+#labels-view header {
+  color: #8c8c8c;
+  padding: 10px 10px 8px 10px;
+  margin: 0 10px 10px 10px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+#labels-view .labels-section {
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+#labels-view .labels-section .label-item-group {
+  position: relative;
+}
+#labels-view .labels-section .label-item-group .label-item {
+  min-height: 34px;
+  min-width: 150px;
+  margin: 0 53px 0 10px;
+  padding: 0 10px;
+  color: #fff;
+  border-radius: 3px;
+  line-height: 34px;
+  font-weight: bold;
+  text-shadow: 0 0 4px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+#labels-view .labels-section .label-item-group .label-item:hover {
+  background: #298fca;
+  color: #fff;
+}
+#labels-view .labels-section .label-item-group .label-edit {
+  min-height: 34px;
+  min-width: 34px;
+  right: 10px;
+  top: 0px;
+  position: absolute;
+  display: block;
+  background: url("/images/edit-pen.png") no-repeat center;
+}
+#labels-view .labels-section .label-item-group .label-edit:hover {
+  background-color: #cdd2d4;
+}
+#labels-view .labels-section .label-item-group+.label-item-group {
+  margin-top: 4px;
 }

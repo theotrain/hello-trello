@@ -1,23 +1,21 @@
 @import 'whitespace-reset.css'
+@import 'datepicker.min.css'
 @import 'mixins'
 @import 'dragula'
-
-// @font-face 
-//   font-family: trellicons;
-//   src: url(/fonts/trellicons.woff);
 
 html
   height: 100%
    
 body
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  input-font()
   background-color: colors.main
   color: colors.text-light
   height: 100%
   width: 100%
-  overflow: hidden
+  overflow-y: hidden
 
 body > header
+  overflow-x: hidden
   height: 40px
   width: 100%
   background: no-repeat center url('/images/hello.png')
@@ -28,7 +26,7 @@ body > header
     background-color: colors.head-inner
     border: none
     height: 30px
-    border-radius: 3px
+    border-radius()
     margin: 5px
     outline: none
     &:hover
@@ -37,7 +35,7 @@ body > header
       background-color: white
   .search-input
     background-color: rgba(255,255,255,.3)
-    border-radius: 3px
+    border-radius()
     border: none
     color: colors.text-light
     float: left
@@ -52,14 +50,13 @@ body > header
     -webkit-transition: width 150ms
     transition: width 150ms
     width: 180px
-    z-index: 1;
+    z-index: 1
     &:hover
       background-color: colors.head-inner-hover
     &:focus
       background-color: white
       color: colors.text-dark
   a.search-icon
-    // display: inline-block
     min-height: 30px
     min-width: 30px
     background-image: url('/images/search.png')
@@ -95,23 +92,23 @@ body > header
   
 main
   position: relative;
-  height: 100%
-  // overflow-x: scroll
-  // width: 100%
+  overflow-x: auto
+ 
+#scrollbar-style::-webkit-scrollbar
+  background-color: colors.scrollbar.bg
+  border-radius: 7px
+
+#scrollbar-style::-webkit-scrollbar-thumb
+  background-color: colors.scrollbar.thumb
+  border-radius: 7px
   
-  
+
 #list-container
   box-sizing: border-box
-  // height: 100%
-  // background-color: colors.main
-  // background-color: red
   color: colors.text-light
-  padding: 0 5px 25px 5px
+  padding: 0 5px 10px 5px
   overflow-x: auto
   display: table
-  // vertical-align: top
-  // width: 100%
-  // height: 500px
   
 span.clear
   content: ''
@@ -121,69 +118,57 @@ span.clear
 .list-wrapper
   display: table-cell
   min-width: 270px
-  background: green
   vertical-align: top
 
 .list
   margin: 0 5px
-  border-radius: 3px
+  border-radius()
   box-sizing: border-box
   color: colors.text-dark
   width: 270px
   background-color: colors.list
-  // max-height: 100%
-  // height: 150px;
-  
+  position: relative
   .list-cards
-    // display: block
     overflow-y: auto
     padding: 0 10px
     min-height: 10px
-    // height: 100px
   header
     font-size: 14px
     font-weight: bold
     padding: 7px 6px 6px 6px
-  // .list-header
-  //   // background: none
-  //   // border: none
-  //   padding: 5px 6px
-    // font-size: 14px
     form
       display: none
     textarea
-      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+      border-radius()
+      input-font()
       font-weight: bold
       resize: none
-      // background-color: white
       outline: none
       border: none
       padding 3px 5px
-      border-radius: 3px
-      width: 230px
-      // height: auto
+      width: 220px
       overflow: none
     .list-name
-      font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+      border-radius()
+      input-font()
       font-weight: bold
-      // resize: none
-      // background-color: white
       outline: none
       border: none
       padding 3px 5px
-      border-radius: 3px
-      width: 230px
+      width: 220px
       cursor: pointer
-      
-      // background-color: rgba(0,0,0,0)
-      // -webkit-user-select: none;
-      // -khtml-user-select: none;
-      // -moz-user-select: none;
-      // -ms-user-select: none;
-      // -o-user-select: none;
-      // user-select: none;
+    .more
+      min-height: 26px
+      min-width: 26px
+      position: absolute
+      top: 5px
+      right: 5px
+      background: url('/images/more.png') no-repeat center
+      &:hover
+        background-color: colors.more-hover
       
   a
+    outline: none
     &:link
       color: colors.text-dark-faded
       text-decoration: none
@@ -201,8 +186,8 @@ span.clear
 div.card
   position: relative
   background-color: colors.card
-  padding: 10px 8px
-  border-radius: 3px
+  padding: 5px 8px 10px 8px
+  border-radius()
   box-shadow: 0 1px 0 colors.card-shadow
   max-width: 300px
   min-height: 20px
@@ -219,7 +204,7 @@ div.card
     background-color: colors.card-hover
     min-height: 26px
     min-width: 26px
-    border-radius: 3px
+    border-radius()
     opacity: .4
     &:hover
       opacity: 1
@@ -229,14 +214,12 @@ div.card
     .edit
       display: block
   textarea
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+    input-font()
     color: colors.text-dark 
     overflow: none
     box-sizing: padding-box
-    // word-wrap: break-word
     resize: none
     border: none
-    // height: auto
     outline: none
     width: 100%
     margin-bottom: 4px
@@ -244,18 +227,17 @@ div.card
     -moz-box-shadow: none
     box-shadow: none
     padding: 0
+  .card-labels
+    margin: 0 0 5px 0
+    pointer-events: none
+    .label
+      min-height: 8px
+      min-width: 42px
+      margin-right: 3px
+      display: inline-block
+      border-radius()
+        
     
-    // font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-    // font-weight: bold
-    // resize: none
-    // outline: none
-    // border: none
-    // padding 3px 5px
-    // border-radius: 3px
-    // width: 248px
-    // overflow: none
-      
-      
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus
   border:none
@@ -271,7 +253,7 @@ div.card
       font-weight: bold
       background: colors.add-button
       color: colors.button.text
-      border-radius: 3px
+      border-radius()
       border: none
       box-shadow: 0 1px 0 colors.add-button-shadow
       float: left
@@ -290,7 +272,7 @@ div.card
     position: relative
     background-color: colors.card
     padding: 10px 8px
-    border-radius: 3px
+    border-radius()
     box-shadow: 0 1px 0 colors.card-shadow
     margin-top: 7px
 
@@ -305,7 +287,7 @@ div.card
   font-size: 14px
   text-align: left
   border: none
-  border-radius: 3px
+  border-radius()
   &:hover
     background: colors.add-list-button-hover
   &:focus
@@ -315,7 +297,7 @@ div.card
   display: none;
   margin: 0 5px
   padding: 4px 4px 0 4px
-  border-radius: 3px
+  border-radius()
   box-sizing: border-box
   color: colors.text-dark
   width: 270px
@@ -325,7 +307,8 @@ div.card
     clear: both
     display: block
   input
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+    border-radius()
+    input-font()
     color: colors.text-dark 
     padding: 9px 
     overflow: hidden
@@ -333,18 +316,12 @@ div.card
     word-wrap: break-word
     resize: none
     border: 1px solid colors.add-list-input-border
-    border-radius: 3px
     background: colors.add-list-input-inner
     -webkit-box-shadow: inset 0px 0px 20px 1px rgba(0,0,0,0.1)
     -moz-box-shadow: inset 0px 0px 20px 1px rgba(0,0,0,0.1)
     box-shadow: inset 0px 0px 20px 1px rgba(0,0,0,0.1)
-    // height: auto
     outline: none
     width: 100%
-    // margin-bottom: 4px
-    // -webkit-box-shadow: none
-    // -moz-box-shadow: none
-    // box-shadow: none
   .add-footer
     .add
       width: 60px
@@ -354,7 +331,7 @@ div.card
       font-weight: bold
       background: colors.add-button
       color: colors.button.text
-      border-radius: 3px
+      border-radius()
       border: none
       outline: none
       box-shadow: 0 1px 0 colors.add-button-shadow
@@ -377,27 +354,37 @@ div.card
   position: fixed
   left: 0
   overflow: auto
-  // right: 0
   top: 0
-  // bottom: 0
            
 .modal-content
   width: 730px
-  // min-height: 200px
   margin: 48px auto auto auto
   position: relative
   z-index: 2
-  border-radius: 3px
+  border-radius()
   background: colors.modal.bg
   color: colors.text-dark
   h2
-    font-size: 18px
     font-weight: bold
   header
-    padding: 20px 50px 5px 48px
-    // background-color: red
+    padding: 17px 50px 5px 45px
+    font-size: 18px
+    min-height: 30px
     background: no-repeat url('/images/detail-icon.jpg')
     background-position: left 15px top 20px
+    textarea
+      color: colors.text-dark
+      padding 3px 5px
+      border-radius()
+      input-font()
+      font-weight: bold
+      border: none
+      resize: none
+      outline: none
+      width: 95%
+      &.disabled
+        background: none
+
   .close
     min-width: 26px
     min-height: 26px
@@ -410,15 +397,15 @@ div.card
       opacity: 1
   main
     width: 575px
-    padding: 15px 25px 15px 15px
+    padding: 0 25px 15px 15px
     box-sizing: border-box
     float: left
-    // background-color: #ddeebb
     h5
       color: colors.text-dark-faded
       font-weight: normal
     .card-detail-labels
       padding-left: 34px
+      margin-bottom: 28px
       .label-list
         margin-top: 8px
         .label
@@ -429,23 +416,86 @@ div.card
           padding: 7px 10px
           font-weight: bold
           color: white
-          border-radius: 3px
+          border-radius()
           text-shadow: 0 0 4px rgba(0, 0, 0, 0.5)
           &+.label
             margin-left: 5px
-      // background-color: #888
     .card-detail-description
       padding-left: 34px
-      margin-top: 28px
       p
-        margin-top: 9px
-      // background-color: #ccc
+        margin-top: 7px
+        cursor: pointer
+      a
+        text-decoration: underline
+      form
+        display: none;
+        margin-top: 10px
+        padding: none
+        border-radius()
+        box-sizing: border-box
+        color: colors.text-dark
+        &:after
+          content: ''
+          clear: both
+          display: block
+        textarea
+          border-radius()
+          input-font()
+          color: colors.text-dark 
+          padding: 9px 
+          margin: 0
+          overflow: hidden
+          box-sizing: border-box
+          word-wrap: break-word
+          resize: none
+          border: 1px solid colors.card-shadow
+          background: colors.modal.description-textarea
+          -webkit-box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.07)
+          -moz-box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.07)
+          box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.07)
+          outline: none
+          width: 100%
+        .add-footer
+          .add
+            width: 60px
+            padding: 8px 12px
+            margin: 4px 0 0 0
+            font-size: 14px
+            font-weight: bold
+            background: colors.add-button
+            color: colors.button.text
+            border-radius()
+            border: none
+            outline: none
+            box-shadow: 0 1px 0 colors.add-button-shadow
+            float: left
+          .remove
+            min-width: 26px
+            margin: 8px 6px
+            min-height: 26px
+            background: url('/images/close.png') no-repeat center
+            opacity: .4
+            float: left
+            &:hover
+              opacity: 1
+    .card-due-date
+      padding-left: 34px
+      margin-bottom: 20px
+      .due-link
+        display: inline-block
+        margin-top: 8px
+        padding: 7px
+        background: colors.modal.disabled
+        color: colors.text-dark-faded
+        text-decoration: underline
+        &:hover
+          color: colors.text-dark
+          background: colors.modal.date-hover
+          cursor: pointer
     .add-comment
-      margin-top: 23px
+      margin-top: 27px
       padding: 0 0 0 34px
       background: no-repeat url('/images/add-comment-icon.jpg')
-      // background-position:
-      // background-color: #d5d5d5
       form
         text-align: right
         margin-top: 10px
@@ -453,16 +503,15 @@ div.card
           width: 100%
           padding: 10px
           color: colors.text-dark 
-          font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+          border-radius()
+          input-font()
           border: none
-          border-radius: 3px
           resize: none
           outline: none
           box-sizing: border-box
           box-shadow: 0 1px 0 colors.card-shadow
         button.comment
-          font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-          // color: colors.text-dark
+          input-font()
           width: 60px
           padding: 8px 12px
           margin: 8px 0
@@ -470,7 +519,7 @@ div.card
           font-weight: bold
           background: colors.add-button
           color: colors.button.text
-          border-radius: 3px
+          border-radius()
           border: none
         button.disabled
           background-color: colors.modal.disabled
@@ -479,13 +528,28 @@ div.card
           cursor: default
     .comments
       padding-left: 34px
-      padding-bottom: 15px
-      // background-color: #666
+      padding-bottom: 12px
       background: no-repeat url('/images/comments-icon.jpg')
+      h2
+      .comment
+        padding: 12px 0 12px 0
+        &+.comment
+          border-top: 1px solid colors.modal.btn-outline
+        .comment-body
+          margin-bottom: 10px
+          display: inline-block
+          border-radius()
+          background-color: colors.card
+          padding: 10px 8px
+          border-radius()
+          box-shadow: 0 1px 0 colors.card-shadow
+        .comment-date
+          color: colors.text-dark-faded
+          font-size: 12px
+          
   .sidebar
     width: 155px
     padding: 8px 12px 12px 0
-    // background-color: green
     float:right
     box-sizing: border-box
     .card-detail-btn-group
@@ -494,16 +558,17 @@ div.card
       h2
         margin-bottom: 6px
       button
-        text-align: left
         width: 100%
         padding: 7px 10px
         color: colors.text-dark
         height: 33px
         font-size: 15px
         font-weight: bold
-        border-radius: 3px
+        text-align: left
+        border-radius()
         border: 1px solid colors.modal.btn-outline
         box-shadow: 0 1px 0 colors.modal.btn-outline
+        outline: none
         background: #ffffff; /* Old browsers */
         background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%) /* FF3.6-15 */
         background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 100%) /* Chrome10-25,Safari5.1-6 */
@@ -513,29 +578,154 @@ div.card
           color: white
           border: none
           box-shadow: 0 1px 0 rgba(0,0,0,0.3)
+        &:disabled
+          opacity: .5
+          &:hover
+            background: #ffffff; /* Old browsers */
+            background: -moz-linear-gradient(top, #ffffff 0%, #f9f9f9 100%) /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #ffffff 0%,#f9f9f9 100%) /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #ffffff 0%,#f9f9f9 100%) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            color: inherit
+            border: 1px solid colors.modal.btn-outline
+            box-shadow: 0 1px 0 colors.modal.btn-outline
         &+button
           margin-top: 6px
   &:after
     clear: both
     display: block
     content: '' 
-   
-    
-//     <header>Title goes here</header>
-// <main>
-//   <div class="card-detail-labels">
-//     labels here
-//   </div>
-//   <div class="card-detail-description">
-//     description here
-//   </div>
-//   <div class="add-comment">
-//     comment add form here
-//   </div>
-//   <div class="comments">
-//     comments here
-//   </div>
-// </main>
-// <div class=".sidebar">
-//   sidebar contents here
-// </div>
+
+#popup
+  position: absolute
+  left: 0px
+  top: 0px
+ 
+#date-view
+  width: 275px
+  padding: 10px
+  color: colors.text-dark
+  background: white
+  border-radius()
+  z-index: 10
+  position: absolute
+  box-sizing: border-box
+  border: colors.card-shadow
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  .close
+    min-width: 26px
+    min-height: 26px
+    top: 5px
+    right: 4px
+    position: absolute
+    background: url('/images/close.png') no-repeat center
+    background-size: 70%
+    opacity: .4
+    &:hover
+      opacity: 1
+  header
+    color: colors.text-dark-faded
+    padding: 0 0 8px 0
+    text-align: center
+    border-bottom: 1px solid colors.card-shadow
+  .date-entry-section
+    margin-top: 10px
+    .date-entry
+      box-sizing: border-box
+      font-weight: bold
+      color: colors.text-dark
+      width: 40%
+      display: inline-block
+      &+.date-entry
+        margin-left: 30px
+      input
+        border-radius()
+        input-font()
+        padding: 10px
+        margin-top: 5px
+        color: colors.text-dark
+        border: 1px solid colors.card-shadow
+        width: 100%
+  .date-buttons
+    &:after
+      clear: both
+      display: block
+      content: ''
+    button
+      width: 90px
+      padding: 8px 12px
+      margin: 8px 0
+      font-size: 14px
+      font-weight: bold
+      border-radius()
+      outline: none
+      border: none
+      cursor: pointer
+      &.save
+        background: colors.add-button
+        box-shadow: 0 1px 0 colors.add-button-shadow 
+        color: colors.button.text
+        float: left
+      &.remove
+        background: colors.modal.disabled
+        box-shadow: 0 1px 0 colors.card-shadow
+        color: colors.button.remove
+        float: right
+      &:hover
+        box-shadow:inset 0 0 0 99px rgba(0,0,0,0.1);
+        
+.datepicker
+  margin: 15px auto 8px auto
+
+
+#list-menu-view
+  width: 240px
+  popup-main()
+  .list-menu-section
+    margin-top: 2px
+    margin-bottom: 10px
+    .list-menu-item
+      padding: 7px 10px
+      font-weight: bold
+      color: colors.text-dark
+      cursor: pointer
+      &:hover
+        background: colors.list-menu-hover
+        color: colors.list-menu-hover-text
+      
+
+#labels-view
+  width: 280px
+  popup-main()
+  .labels-section
+    margin-top: 2px
+    margin-bottom: 10px
+    .label-item-group
+      position: relative
+      .label-item
+        min-height: 34px
+        min-width: 150px
+        margin: 0 53px 0 10px
+        padding: 0 10px
+        color: white
+        border-radius()
+        line-height: 34px
+        font-weight: bold
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.5)
+        cursor: pointer
+        &:hover
+          background: colors.list-menu-hover
+          color: colors.list-menu-hover-text
+      .label-edit
+        min-height: 34px
+        min-width: 34px
+        right: 10px
+        top: 0px
+        position: absolute
+        display: block
+        background: url('/images/edit-pen.png') no-repeat center
+        &:hover
+          background-color: colors.more-hover
+      &+.label-item-group
+        margin-top: 4px

@@ -1,3 +1,40 @@
+input-font()
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  
+border-radius()
+  border-radius: 3px
+
+popup-main()
+  color: colors.text-dark
+  background: white
+  border-radius()
+  z-index: 10
+  position: absolute
+  box-sizing: border-box
+  border: colors.card-shadow
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  .close
+    min-width: 26px
+    min-height: 26px
+    top: 5px
+    right: 4px
+    position: absolute
+    background: url('/images/close.png') no-repeat center
+    background-size: 70%
+    opacity: .4
+    &:hover
+      opacity: 1
+  header
+    color: colors.text-dark-faded
+    padding: 10px 10px 8px 10px
+    margin: 0 10px 10px 10px
+    text-align: center
+    border-bottom: 1px solid colors.card-shadow
+
+
+
 colors = {
   main: #0079bf,
   head: #0067a3,
@@ -24,14 +61,24 @@ colors = {
   add-list-input-outer: #d7d8da,
   add-list-input-inner: #cccdcf,
   add-list-input-border: #aaaaaa,
+  more-hover: #cdd2d4,
+  list-menu-hover: #298fca,
+  list-menu-hover-text: #fff,
   button: {
     text: #fff,
     bg: #00a388
+    remove: #b04632
   },
   modal: {
     bg: #edeff0,
     disabled: #e2e4e6,
     btn-outline: #e2e4e6,
     btn-hover: #298fca,
+    date-hover: #d6dadc,
+    description-textarea: #e5e7e8
+  },
+  scrollbar: {
+    bg: #00649e,
+    thumb: #66a4c7
   }
 }
