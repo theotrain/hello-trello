@@ -26,7 +26,7 @@ var App = {
 
     this.dragCards = dragula([].slice.apply(document.querySelectorAll('.list-cards')), {
       invalid: function (el, handle) {
-        return el.className === 'card-composer';
+        return el.classList.contains('nodrag');
       }
     })
       .on('drop', function(el, target, source, sibling) {
@@ -34,6 +34,7 @@ var App = {
           var targetListId = target.parentElement.getAttribute('data-id');
           this.boardMdl.get('lists').get(+sourceListId).updateAfterDrop($(source));
           this.boardMdl.get('lists').get(+targetListId).updateAfterDrop($(target));
+          this.setListContainerHeight();
           this.save();
         }.bind(this));
   },
@@ -112,7 +113,7 @@ var App = {
       }
     }
   },
-  setupAutosave: function() {
+  respondToChanges: function() {
     this.cardsColl.on({
       'add remove change': this.save
     });
@@ -146,7 +147,7 @@ var App = {
   },
   resetBoard: function() {
     this.boardView();
-    this.setupAutosave();
+    this.respondToChanges();
     this.initDraggable();
     this.expandableTextareas();
     this.autoListContainerHeight();
@@ -162,10 +163,6 @@ var App = {
     this.nextLabelId = boardJSON.labels.nextId;
     this.boardMdl = new BoardModel(boardJSON.board, { silent: true });
     this.initHelpers();
-    this.boardView();
-    this.setupAutosave();
-    this.initDraggable();
-    this.expandableTextareas();
-    this.autoListContainerHeight();
+    this.resetBoard();
   }
 }

@@ -1,7 +1,7 @@
 this["JST"] = this["JST"] || {};
 
 this["JST"]["add_card"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"card-composer\"><div class=\"card\"><textarea class=\"autoExpand\"></textarea></div><div class=\"add-footer\"><button class=\"add\">Add</button><div class=\"remove\"></div></div></div>";
+    return "<div class=\"card-composer nodrag\"><div class=\"card\"><textarea class=\"autoExpand\"></textarea></div><div class=\"add-footer\"><button class=\"add\">Add</button><div class=\"remove\"></div></div></div>";
 },"useData":true});
 
 this["JST"]["add_list"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

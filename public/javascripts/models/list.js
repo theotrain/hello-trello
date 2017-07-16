@@ -15,10 +15,13 @@ var ListModel = Backbone.Model.extend({
     this.storeJSON = this.toJSON();
   },
   updateAfterDrop: function($el) {
+    console.log($el)
     var cardsArray = [];
-    $el.children().each(function(idx,div){
+    $el.children('.card').each(function(idx,div){
       cardsArray.push(+$(div).attr('data-id'));
     });
+    console.log('array of cards for: ' + $el);
+    console.log(cardsArray);
     this.createCards(cardsArray);
   },
   changeName: function(name) {
