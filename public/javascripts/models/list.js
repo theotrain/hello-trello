@@ -11,17 +11,14 @@ var ListModel = Backbone.Model.extend({
       card.list = this;
       cc.add(card);
     }.bind(this));
-    this.set('cards', cc);
+    this.set('cards', cc, {silent: true});
     this.storeJSON = this.toJSON();
   },
   updateAfterDrop: function($el) {
-    console.log($el)
     var cardsArray = [];
     $el.children('.card').each(function(idx,div){
       cardsArray.push(+$(div).attr('data-id'));
     });
-    console.log('array of cards for: ' + $el);
-    console.log(cardsArray);
     this.createCards(cardsArray);
   },
   changeName: function(name) {

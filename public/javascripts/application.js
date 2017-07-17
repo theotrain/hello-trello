@@ -129,21 +129,20 @@ var App = {
     this.listsColl.on({
       'add remove': this.expandableTextUpdate
     });
-  },       
+  },  
   save: function() {
-    // console.log('saving .... ');
-    // console.log(JSON.stringify(App.toJSON()));
+    if (throttleSaves.isActive()) {
+      throttleSaves.save();
+      return;
+    }
     $.ajax({
       type: 'post',
       url: '/save',
       dataType: 'json',
-      crossDomain: true,
       data: JSON.stringify(App.toJSON()),
-      contentType: 'application/json',
-      success: function(data){
-        // console.log("saved success");
-      }
+      contentType: 'application/json'
     });
+    throttleSaves.start();
   },
   resetBoard: function() {
     this.boardView();
@@ -164,5 +163,28 @@ var App = {
     this.boardMdl = new BoardModel(boardJSON.board, { silent: true });
     this.initHelpers();
     this.resetBoard();
+  }
+}
+
+var throttleSaves = {
+  delay: 6000,
+  savesPending: false,
+  active: false,
+  start: function() {
+    window.setTimeout(this.finish.bind(this), this.delay);
+    this.active = true;
+  },
+  finish: function() {
+    this.active = false;
+    if (this.savesPending) {
+      App.save();
+    }
+    this.savesPending = false;
+  },
+  isActive: function() {
+    return this.active;
+  },
+  save: function() {
+    this.savesPending = true;
   }
 }

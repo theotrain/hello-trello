@@ -31,8 +31,6 @@ var EditCardWindow = Backbone.View.extend({
       var label = App.labelsColl.get(idx);
       this.$el.find('.label-list').append(this.labelTemplate(label.toJSON()));
     }.bind(this));
-
-    console.log(this.model.toJSON());
   },
   renderDatePicker: function(e) {
     var el = e.target,
@@ -83,7 +81,8 @@ var EditCardWindow = Backbone.View.extend({
   saveComment: function(e) {
     e.preventDefault();
     var text = this.$el.find('.add-comment textarea').val().trim();
-    this.model.get('comments').add({body: text, date: new Date().getTime()});
+    this.model.get('comments').add({body: text, date: new Date().getTime()}, {silent: true});
+    App.save();
     this.render();
   },
   processKey: function(e) {

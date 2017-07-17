@@ -8,9 +8,11 @@ router.get('/', function(req, res) {
   res.render('index', { board: board_connect.get() });
 });
 
+
 router.post('/save', function(req, res) {
   board_connect.set(JSON.stringify(req.body));
   res.end();
 });
+
 
 module.exports = router;
