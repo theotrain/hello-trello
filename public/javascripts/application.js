@@ -21,7 +21,9 @@ var App = {
     })
       .on('drop', function(el, target, source, sibling) {
         this.boardMdl.updateAfterDrop();
-        this.save();
+        this.save({
+          board: this.boardMdl.toJSON()
+        });
       }.bind(this));
 
     this.dragCards = dragula([].slice.apply(document.querySelectorAll('.list-cards')), {
@@ -35,7 +37,9 @@ var App = {
           this.boardMdl.get('lists').get(+sourceListId).updateAfterDrop($(source));
           this.boardMdl.get('lists').get(+targetListId).updateAfterDrop($(target));
           this.setListContainerHeight();
-          this.save();
+          this.save({
+            lists: this.boardMdl.get('lists').toJSON()
+          });
         }.bind(this));
   },
   addList: function(name) {
@@ -99,30 +103,7 @@ var App = {
       return month + ' ' + day + ' at ' + hours + ':' + minutes + ' ' + ampm;
     });
   },
-  toJSON: function() {
-    return {
-      board: this.boardMdl.toJSON(),
-      lists: this.boardMdl.get('lists').toJSON(),
-      cards: {
-        nextId: this.nextCardId,
-        collection: this.cardsColl.toJSON()
-      },
-      labels: {
-        nextId: this.nextLabelId,
-        collection: this.labelsColl.toJSON()
-      }
-    }
-  },
   respondToChanges: function() {
-    this.cardsColl.on({
-      'add remove change': this.save
-    });
-    this.listsColl.on({
-      'add remove change': this.save
-    });
-    this.labelsColl.on({
-      'add remove change': this.save
-    });
     this.cardsColl.on({
       'add remove': this.expandableTextUpdate
     });
@@ -130,19 +111,25 @@ var App = {
       'add remove': this.expandableTextUpdate
     });
   },  
-  save: function() {
-    if (throttleSaves.isActive()) {
-      throttleSaves.save();
-      return;
+
+  save: function(saveObject) {
+    if (saveObject.card) {
+      saveObject.nextCardId = this.nextCardId;
     }
     $.ajax({
-      type: 'post',
+      method: 'post',
       url: '/save',
-      dataType: 'json',
-      data: JSON.stringify(App.toJSON()),
-      contentType: 'application/json'
+      data: JSON.stringify(saveObject),
+      contentType: 'application/json',
+    })
+  },
+  delete: function(deleteObject) {
+    $.ajax({
+      method: 'post',
+      url: '/delete',
+      data: JSON.stringify(deleteObject),
+      contentType: 'application/json',
     });
-    throttleSaves.start();
   },
   resetBoard: function() {
     this.boardView();
@@ -163,28 +150,5 @@ var App = {
     this.boardMdl = new BoardModel(boardJSON.board, { silent: true });
     this.initHelpers();
     this.resetBoard();
-  }
-}
-
-var throttleSaves = {
-  delay: 6000,
-  savesPending: false,
-  active: false,
-  start: function() {
-    window.setTimeout(this.finish.bind(this), this.delay);
-    this.active = true;
-  },
-  finish: function() {
-    this.active = false;
-    if (this.savesPending) {
-      App.save();
-    }
-    this.savesPending = false;
-  },
-  isActive: function() {
-    return this.active;
-  },
-  save: function() {
-    this.savesPending = true;
   }
 }

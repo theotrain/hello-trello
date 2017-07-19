@@ -17,7 +17,10 @@ var listMenuView = Backbone.View.extend({
     var id = this.model.get('id');
     App.listsColl.remove(id, { silent: true });
     App.boardMdl.get('lists').remove(id, { silent: true });
-    App.save();
+    App.delete({
+      listID: id,
+      board: App.boardMdl.toJSON()
+    });
     App.resetBoard();
     this.close();
   },

@@ -2,7 +2,9 @@ var CardModel = Backbone.Model.extend({
   defaults: {
     title: '',
     description: '',
-    labels: []
+    due: null,
+    labels: [],
+    comments: []
   },
   triggerChange: function() {
     this.trigger('change');

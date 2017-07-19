@@ -57,10 +57,14 @@ var EditCardWindow = Backbone.View.extend({
     });
   },
   deleteCard: function() {
+    var id = this.model.get('id');
     App.cardsColl.remove(this.model, { silent: true });
     this.model.list.get('cards').remove(this.model, { silent: true });
 
-    App.save();
+    App.delete({
+      cardID: id,
+      list: this.model.list.toJSON()
+    });
     App.resetBoard();
     this.$el.html('');
   },
@@ -73,6 +77,9 @@ var EditCardWindow = Backbone.View.extend({
         text = textarea.val().trim();
 
     this.model.set('title', text);
+    App.save({
+      card: this.model.toJSON()
+    });
     textarea.val(this.model.get('title'));
     textarea.blur();
     textarea.addClass('disabled');
@@ -82,7 +89,9 @@ var EditCardWindow = Backbone.View.extend({
     e.preventDefault();
     var text = this.$el.find('.add-comment textarea').val().trim();
     this.model.get('comments').add({body: text, date: new Date().getTime()}, {silent: true});
-    App.save();
+    App.save({
+      card: this.model.toJSON()
+    })
     this.render();
   },
   processKey: function(e) {
@@ -111,6 +120,9 @@ var EditCardWindow = Backbone.View.extend({
 
     this.model.set('description', text);    
     App.cardsColl.add(this.model);
+    App.save({
+      card: this.model.toJSON()
+    })
     this.closeEditDescription();
     this.render();
   },

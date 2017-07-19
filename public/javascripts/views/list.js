@@ -15,10 +15,8 @@ var ListView = Backbone.View.extend({
     if (e.which === 13) {
       if (this.$el.find('header textarea').is(":focus")) {
         this.finishEditName();
-        console.log('we hit return in the name editor');
       }
       if (this.$el.find('.card-composer textarea').is(":focus")) {
-        console.log('we hit return in the name card editor');
         this.addCard();
       }
     }

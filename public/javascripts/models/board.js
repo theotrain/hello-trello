@@ -20,12 +20,16 @@ var BoardModel = Backbone.Model.extend({
       name: name
     });
 
-    App.listsColl.add({
+    var list = App.listsColl.add({
       id: App.nextListId,
       name: name
     });
 
     App.nextListId += 1;
+    App.save({
+      list: list.toJSON(),
+      board: App.boardMdl.toJSON()
+    });
     App.resetBoard();
   },
   listsArray: function() {

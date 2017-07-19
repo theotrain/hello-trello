@@ -12,7 +12,7 @@ module.exports = {
   },
 
   set: function(board_json_string) {
-    fs.writeFileSync(file_path, board_json_string, 'utf8');
+    fs.writeFileSync(file_path, JSON.stringify(board_json_string, null, 2), 'utf8', 4);
   }
 
 };

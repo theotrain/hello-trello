@@ -46,8 +46,17 @@ var ListModel = Backbone.Model.extend({
       id: options.id,
       title: options.title
     };
-    this.get('cards').add(card);
-    App.cardsColl.add(card);
+    var cardModel = this.get('cards').add(card, {silent: true});
+    App.cardsColl.add(card, {silent: true});
+    App.save({
+      card: cardModel.toJSON(),
+      list: this.toJSON()
+    });
+    // board: boardMdl to overwrite,
+    // lists: array of listModels,
+    // list: one listModel to overwrite,
+    // card: cardModel to overwrite,
+    // nextCardId: #
   },
   initialize: function(json) {
     this.set('name', this.get('name') || json.name);

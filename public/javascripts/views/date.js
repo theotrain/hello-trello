@@ -16,6 +16,9 @@ var DateView = Backbone.View.extend({
     
     if (date == 'Invalid Date') return;
     this.model.set('due', date.getTime());
+    App.save({
+      card: this.model.toJSON()
+    });
     this.close();
   },
   removeDate: function() {
